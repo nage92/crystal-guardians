@@ -5,20 +5,22 @@ extends CanvasLayer
 @onready var dialogue_label: Label = $PanelContainer/VBoxContainer/DialogueLabel
 @onready var continue_button: Button = $PanelContainer/VBoxContainer/ContinueButton
 
-var current_dialogues: Array[String] = []
+var current_dialogues: Array = []
 var dialogue_index: int = 0
 var is_open: bool = false
 
 func _ready() -> void:
 	panel.hide()
 	continue_button.pressed.connect(next_dialogue)
-func show_dialogue(character_name: String, dialogues: Array[String]) -> void:
+func show_dialogue(character_name: String, dialogues: Array) -> void:
 	if dialogues.is_empty():
 		return
 	current_dialogues = dialogues
 	dialogue_index = 0
 	is_open = true
 	name_label.text = character_name
+	dialogue_label.text = current_dialogues[0]
+	continue_button.grab_focus()
 	panel.show()
 func next_dialogue() -> void:
 	dialogue_index += 1
