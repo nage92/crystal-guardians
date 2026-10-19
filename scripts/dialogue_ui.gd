@@ -20,12 +20,8 @@ func show_dialogue(character_name: String, dialogues: Array) -> void:
 	dialogue_index = 0
 	is_open = true
 	name_label.text = character_name
-<<<<<<< HEAD
 	dialogue_label.text = current_dialogues[0]
 	continue_button.grab_focus()
-=======
-	dialogue_label.text = dialogues[0]
->>>>>>> upstream/main
 	panel.show()
 func next_dialogue() -> void:
 	dialogue_index += 1

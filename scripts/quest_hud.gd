@@ -12,16 +12,16 @@ func update_quest_text() -> void:
 	match QuestManager.quest_state:
 
 		QuestManager.QuestState.NOT_STARTED:
-			quest_label.text = "Misión: habla con el profesor"
+			quest_label.text = "Quest: Talk with the professor"
 
 		QuestManager.QuestState.ACTIVE:
-			quest_label.text = "Cristales: %d/%d" % [
+			quest_label.text = "Crystals: %d/%d" % [
 				QuestManager.collected_crystals,
 				QuestManager.required_crystals
 			]
 
 		QuestManager.QuestState.READY_TO_DELIVER:
-			quest_label.text = "Regresa con el profesor"
+			quest_label.text = "Get back with the professor"
 
 		QuestManager.QuestState.COMPLETED:
-			quest_label.text = "Misión completada"
+			quest_label.text = "Completed quest"
