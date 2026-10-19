@@ -5,18 +5,17 @@ var total_crystals: int = 0
 
 @onready var crystal_label: Label = \
 	$UI/HUD/CrystalLabel
+@onready var player = $player
+@onready var game_hud = $GameHUD
+
 
 func _ready() -> void:
 	var crystals := $crystals.get_children()
 
 	total_crystals = crystals.size()
+	player.health_changed.connect(game_hud.update_health)
+	game_hud.update_health(player.health, player.max_health)
 
-	for crystal in crystals:
-		crystal.collected.connect(
-			_on_crystal_collected
-		)
-
-	update_crystal_label()
 
 func _on_crystal_collected() -> void:
 	crystals_collected += 1
