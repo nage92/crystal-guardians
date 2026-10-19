@@ -9,6 +9,7 @@ var current_dialogues: Array = []
 var dialogue_index: int = 0
 var is_open: bool = false
 
+signal dialogue_finished
 func _ready() -> void:
 	panel.hide()
 	continue_button.pressed.connect(next_dialogue)
@@ -31,3 +32,4 @@ func next_dialogue() -> void:
 func close_dialogue() -> void:
 	panel.hide()
 	is_open = false
+	
