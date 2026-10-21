@@ -13,6 +13,7 @@ enum QuestState {
 var quest_state: QuestState = QuestState.NOT_STARTED
 var required_crystals: int = 3
 var collected_crystals: int = 0
+var collected_crystal_ids: Array[String] = []
 
 func start_quest() -> void:
 	if quest_state != QuestState.NOT_STARTED:
@@ -21,9 +22,12 @@ func start_quest() -> void:
 	quest_state = QuestState.ACTIVE
 	quest_updated.emit()
 	
-func collect_crystal() -> bool:
+func collect_crystal(crystal_id: String) -> bool:
 	if quest_state != QuestState.ACTIVE:
 		return false
+	if crystal_id in collected_crystal_ids:
+		return false
+	collected_crystal_ids.append(crystal_id)
 	collected_crystals += 1
 	if collected_crystals >= required_crystals:
 		quest_state = QuestState.READY_TO_DELIVER
@@ -36,3 +40,9 @@ func complete_quest() -> void:
 	quest_state = QuestState.COMPLETED
 	quest_updated.emit()
 	quest_completed.emit()
+
+func reset_quest() -> void:
+	quest_state = QuestState.NOT_STARTED
+	collected_crystals = 0
+	collected_crystal_ids.clear()
+	quest_updated.emit()
